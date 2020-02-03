@@ -16,6 +16,8 @@ import br.edu.unicid.domain.Produto;
 import br.edu.unicid.domain.enums.TipoCliente;
 import br.edu.unicid.repositories.CategoriaRepository;
 import br.edu.unicid.repositories.CidadeRepository;
+import br.edu.unicid.repositories.ClienteRepository;
+import br.edu.unicid.repositories.EnderecoRepository;
 import br.edu.unicid.repositories.EstadoRepository;
 import br.edu.unicid.repositories.ProdutoRepository;
 
@@ -33,6 +35,12 @@ public class RmServiceFullApplication implements CommandLineRunner{
 	
 	@Autowired
 	private CidadeRepository cidadeRepository;	
+	
+	@Autowired
+	private ClienteRepository clienteRepository;
+	
+	@Autowired
+	private EnderecoRepository enderecoRepository;
 	
 	
 	public static void main(String[] args) {
@@ -82,6 +90,9 @@ public class RmServiceFullApplication implements CommandLineRunner{
 		Endereco e2 = new Endereco(null, "Rua sdafafsd", "34", "", "Tadfghjfghjtuape", "0004567", cli1, c2);
 		
 		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+		
+		clienteRepository.saveAll(Arrays.asList(cli1));
+		enderecoRepository.saveAll(Arrays.asList(e1, e2));
 	}
 	
 	

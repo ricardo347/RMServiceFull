@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CollectionId;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import br.edu.unicid.domain.enums.TipoCliente;
 @Entity
 public class Cliente implements Serializable{
@@ -29,6 +31,7 @@ public class Cliente implements Serializable{
 	private String cpfcnpj;
 	private Integer tipoCliente;
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "cliente")
 	private List<Endereco> enderecos = new ArrayList<>();
 	

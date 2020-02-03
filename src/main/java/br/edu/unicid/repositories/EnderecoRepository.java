@@ -2,9 +2,10 @@ package br.edu.unicid.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import br.edu.unicid.domain.Categoria;
+
+import br.edu.unicid.domain.Endereco;
 
 @Repository
-public interface EnderecoRepository  extends JpaRepository<Categoria, Integer> {
+public interface EnderecoRepository  extends JpaRepository<Endereco, Integer> {
 
 }
