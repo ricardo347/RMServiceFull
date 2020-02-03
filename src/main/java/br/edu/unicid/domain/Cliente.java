@@ -14,8 +14,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import org.hibernate.annotations.CollectionId;
-
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.edu.unicid.domain.enums.TipoCliente;
@@ -39,6 +37,10 @@ public class Cliente implements Serializable{
 	@ElementCollection
 	@CollectionTable(name="tb_telefone")
 	private Set<String> telefones = new HashSet<>();
+	
+	@OneToMany(mappedBy = "cliente")
+
+	private List<Pedido> pedidos = new ArrayList<>();
 	
 	public Cliente() {
 		
@@ -132,6 +134,10 @@ public class Cliente implements Serializable{
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public List<Pedido> getPedidos() {
+		return pedidos;
 	}
 	
 	
