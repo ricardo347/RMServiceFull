@@ -6,19 +6,35 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import br.edu.unicid.domain.enums.TipoCliente;
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.CollectionId;
+
+import br.edu.unicid.domain.enums.TipoCliente;
+@Entity
 public class Cliente implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 	private String email;
 	private String cpfcnpj;
 	private Integer tipoCliente;
 	
+	@OneToMany(mappedBy = "cliente")
 	private List<Endereco> enderecos = new ArrayList<>();
 	
+	//criação de tabela de entidade fraca
+	@ElementCollection
+	@CollectionTable(name="tb_telefone")
 	private Set<String> telefones = new HashSet<>();
 	
 	public Cliente() {

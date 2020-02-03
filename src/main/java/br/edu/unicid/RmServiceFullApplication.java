@@ -9,8 +9,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import br.edu.unicid.domain.Categoria;
 import br.edu.unicid.domain.Cidade;
+import br.edu.unicid.domain.Cliente;
+import br.edu.unicid.domain.Endereco;
 import br.edu.unicid.domain.Estado;
 import br.edu.unicid.domain.Produto;
+import br.edu.unicid.domain.enums.TipoCliente;
 import br.edu.unicid.repositories.CategoriaRepository;
 import br.edu.unicid.repositories.CidadeRepository;
 import br.edu.unicid.repositories.EstadoRepository;
@@ -72,6 +75,13 @@ public class RmServiceFullApplication implements CommandLineRunner{
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 		
+		Cliente cli1 = new Cliente(null, "Maria Silva", "maria@unicid.br", "4325345", TipoCliente.PESSOAFISICA);
+		cli1.getTelefones().addAll(Arrays.asList("12341234", "00009908"));
+		
+		Endereco e1 = new Endereco(null, "Rua street", "234", "", "Tatuape", "987234", cli1, c1);
+		Endereco e2 = new Endereco(null, "Rua sdafafsd", "34", "", "Tadfghjfghjtuape", "0004567", cli1, c2);
+		
+		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
 	}
 	
 	
