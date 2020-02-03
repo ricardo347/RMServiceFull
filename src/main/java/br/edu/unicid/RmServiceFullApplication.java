@@ -13,6 +13,7 @@ import br.edu.unicid.domain.Cidade;
 import br.edu.unicid.domain.Cliente;
 import br.edu.unicid.domain.Endereco;
 import br.edu.unicid.domain.Estado;
+import br.edu.unicid.domain.ItemPedido;
 import br.edu.unicid.domain.Pagamento;
 import br.edu.unicid.domain.PagamentoComBoleto;
 import br.edu.unicid.domain.PagamentoComCartao;
@@ -25,6 +26,7 @@ import br.edu.unicid.repositories.CidadeRepository;
 import br.edu.unicid.repositories.ClienteRepository;
 import br.edu.unicid.repositories.EnderecoRepository;
 import br.edu.unicid.repositories.EstadoRepository;
+import br.edu.unicid.repositories.ItemPedidoRepository;
 import br.edu.unicid.repositories.PagamentoRepository;
 import br.edu.unicid.repositories.PedidoRepository;
 import br.edu.unicid.repositories.ProdutoRepository;
@@ -55,6 +57,9 @@ public class RmServiceFullApplication implements CommandLineRunner{
 	
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
+	
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 	
 	
 	public static void main(String[] args) {
@@ -121,9 +126,21 @@ public class RmServiceFullApplication implements CommandLineRunner{
 		
 		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
 		
-		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
-		
+		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));		
 		pagamentoRepository.saveAll(Arrays.asList(pgto1, pgto2));
+		
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.0, 1, 2000.0);
+		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.0, 2, 80.0);
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.0, 1, 800.0);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
+		p1.getItems().addAll(Arrays.asList(ip1));
+		p2.getItems().addAll(Arrays.asList(ip3));
+		p3.getItems().addAll(Arrays.asList(ip2));
+		
+		itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
 		
 	}
 	
